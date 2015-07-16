@@ -7,3 +7,9 @@ net.Receive("DR.SyncHullSize",function()
     ply:SetViewOffsetDucked(Vector(0,0,44))
   end)
 end);
+
+hook.Add("InitPostEntity","deathrun.select.spectator",function()
+	if GetConVarNumber("dr_alwaysspectate") == 1 then
+		RunConsoleCommand("dr_doselectspec")
+	end
+end)
