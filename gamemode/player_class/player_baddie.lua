@@ -5,7 +5,7 @@ local PLAYER = {}
 PLAYER.DisplayName = "Baddie"
 
 PLAYER.WalkSpeed 			= 250;
-PLAYER.RunSpeed				= 250;
+PLAYER.RunSpeed				= 550;
 PLAYER.CrouchedWalkSpeed 	= (85/250)
 PLAYER.JumpPower 			= 280
 PLAYER.CanUseFlashlight 	= true;

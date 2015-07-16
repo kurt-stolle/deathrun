@@ -57,7 +57,7 @@ if SERVER then
 	end)
 	hook.Add("PlayerUse","drCheckClaimsOnUse",function(p,ent)
 		if p:Team() == TEAM_BADDIE and ent and ent:GetClass() == "func_button" 
-		and DR.ButtonsClaimed[ent:EntIndex()].claimed and IsValid(DR.ButtonsClaimed[ent:EntIndex()].claimed) then
+		and DR.ButtonsClaimed[ent:EntIndex()] and DR.ButtonsClaimed[ent:EntIndex()].claimed and IsValid(DR.ButtonsClaimed[ent:EntIndex()].claimed) then
 			if DR.ButtonsClaimed[ent:EntIndex()].claimed != p then
 				return false
 			else
@@ -94,9 +94,11 @@ elseif CLIENT then
 					local ps = (v.pos):ToScreen();
 					
 					if v.claimed and IsValid(v.claimed) and v.claimed:IsPlayer() then
-						draw.SimpleTextOutlined("Claimed by "..v.claimed:Nick(),"DermaDefaultBold",ps.x,ps.y,Color(255,255,255,255 - 255 * (v.pos:Distance(p:GetPos())/200)),1,1,1,Color(0,0,0,255 - 255 * (v.pos:Distance(p:GetPos())/200)));
+						draw.SimpleText("Claimed by "..v.claimed:Nick(),"ESDefault+.Shadow",ps.x,ps.y + math.sin(CurTime()*2)*20,Color(0,0,0,255 - 255 * (v.pos:Distance(p:GetPos())/200)),1,1);
+						draw.SimpleText("Claimed by "..v.claimed:Nick(),"ESDefault+",ps.x,ps.y + math.sin(CurTime()*2)*20,Color(255,255,255,255 - 255 * (v.pos:Distance(p:GetPos())/200)),1,1);
 					else
-						draw.SimpleTextOutlined("Press "..string.upper(input.LookupBinding("+menu") or "UNBOUND").." to claim this button","DermaDefaultBold",ps.x,ps.y,Color(255,255,255,255 - 255 * (v.pos:Distance(p:GetPos())/200)),1,1,1,Color(0,0,0,255 - 255 * (v.pos:Distance(p:GetPos())/200)));
+						draw.SimpleText("Press "..string.upper(input.LookupBinding("+menu") or "UNBOUND").." to claim","ESDefault+.Shadow",ps.x,ps.y + math.sin(CurTime()*2)*20,Color(0 ,0,0,255 - 255 * (v.pos:Distance(p:GetPos())/200)),1,1);
+						draw.SimpleText("Press "..string.upper(input.LookupBinding("+menu") or "UNBOUND").." to claim","ESDefault+",ps.x,ps.y + math.sin(CurTime()*2)*20,Color(255,255,255,255 - 255 * (v.pos:Distance(p:GetPos())/200)),1,1);
 					end
 					
 				end

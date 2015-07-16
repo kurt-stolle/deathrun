@@ -150,6 +150,9 @@ function DR:NewRound(rounds_passed)
 	DR.ThisRound = {};
 
 	if SERVER then
+
+		DR:ResetClaims()
+		
 		game.CleanUpMap();
 
 		rounds_passed = rounds_passed + 1;
