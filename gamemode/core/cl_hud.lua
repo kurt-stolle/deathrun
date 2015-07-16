@@ -29,7 +29,6 @@ end
 
 ES.Color.White = ES.Color.White or Color(255,255,255,255);
 ES.Color.Black = ES.Color.Black or Color(0,0,0,255);
-local mat = Material("deathrunexcl/hudthingy.png","nolod");
 local COLOR_TIME = Color(51,204,255);
 local COLOR_HEALTH = Color(200,0,0);
 local COLOR_SHINY = Color(255,255,255,10);
@@ -138,7 +137,7 @@ function DR:HUDPaint()
 
 	vel = Lerp(0.2,vel,watch:GetVelocity():Length())
 	drawInfoBox(ScrW()-20-80,ScrH()-20-40,80,40,"Velocity",math.floor(vel),math.floor(vel)/700);
-	drawInfoBox(ScrW()-20-80-20-120,ScrH()-20-40,120,40,"Round time",convertTime(DR.maxRoundTime-DR.RoundStartTime));
+	drawInfoBox(ScrW()-20-80-20-120,ScrH()-20-40,120,40,"Round time",convertTime(DR.maxRoundTime-(CurTime() - DR.RoundStartTime)));
 
 	local progress = math.Clamp(math.Clamp(watch:Health()/100,0,1)*(100-2),0,(100-2));
 		local x,y = ScrW()-20-80-20-120-20-100,ScrH()-20-40;

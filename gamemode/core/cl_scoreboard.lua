@@ -71,7 +71,7 @@ vgui.Register("DRSBoard",{
 		addPerformanceRow(pnl,"MOTD","Visit us at http://casualbananas.com/. To join our community, put [CB] in front of your Steam name.")
 		addPerformanceRow(pnl,"Map",game.GetMap())
 		addPerformanceRow(pnl,"Players",#player.GetAll())
-		addPerformanceRow(pnl,"Rounds left",10)
+		addPerformanceRow(pnl,"Rounds left",DR.Config.roundsPerMap - DR.RoundsPassed)
 
 		self.info_best=addPerformanceRow(pnl,"Best player","Loading...")
 		self.info_worst=addPerformanceRow(pnl,"Worst player","Loading...")
@@ -86,6 +86,31 @@ vgui.Register("DRSBoard",{
 		pnl:DockPadding(3,3,3,3)
 		pnl.Team = TEAM_BADDIE
 
+		local container=pnl:Add("Panel")
+		container:Dock(FILL)
+
+		local sb=container:Add("esScrollbar")
+		sb.button.Paint=function(self,w,h)
+			draw.RoundedBox(4,0,0,w,h,team.GetColor(TEAM_BADDIE));
+		end
+
+		local scrollBuddy=container:Add("Panel")
+		scrollBuddy.PerformLayout = function(self)
+			local maxh=0
+
+			for k,v in ipairs(self:GetChildren())do
+				if v.y + v:GetTall() + 5 > maxh then
+					maxh=v.y + v:GetTall() + 5;
+				end
+			end
+
+			self:SetWide(self:GetParent():GetWide()-10)
+			self:SetTall(maxh)
+
+			sb:Setup()
+		end
+		scrollBuddy.Team = TEAM_BADDIE
+
 		clr=team.GetColor(TEAM_BADDIE)
 		clr=Color(20+clr.r * .3,20+clr.g * .3,20+clr.b * .3)
 
@@ -99,7 +124,7 @@ vgui.Register("DRSBoard",{
 		lbl:DockMargin(7,7,5,8)
 		lbl:Dock(TOP)
 
-		self.pnl_players_bad = pnl;
+		self.pnl_players_bad = scrollBuddy;
 
 		pnl = self:Add("DRSBoard.TeamContainer")
 		pnl:SetWide(playersPanelWide)
@@ -107,6 +132,31 @@ vgui.Register("DRSBoard",{
 		pnl:Dock(RIGHT)
 		pnl:DockPadding(3,3,3,3)
 		pnl.Team = TEAM_GOODIE
+
+		local container=pnl:Add("Panel")
+		container:Dock(FILL)
+
+		local sb=container:Add("esScrollbar")
+		sb.button.Paint=function(self,w,h)
+			draw.RoundedBox(4,0,0,w,h,team.GetColor(TEAM_GOODIE));
+		end
+
+		local scrollBuddy=container:Add("Panel")
+		scrollBuddy.PerformLayout = function(self)
+			local maxh=0
+
+			for k,v in ipairs(self:GetChildren())do
+				if v.y + v:GetTall() + 5 > maxh then
+					maxh=v.y + v:GetTall() + 5;
+				end
+			end
+
+			self:SetWide(self:GetParent():GetWide()-10)
+			self:SetTall(maxh)
+
+			sb:Setup()
+		end
+		scrollBuddy.Team = TEAM_GOODIE
 
 		clr=team.GetColor(TEAM_GOODIE)
 		clr=Color(20+clr.r * .3,20+clr.g * .3,20+clr.b * .3)
@@ -121,7 +171,7 @@ vgui.Register("DRSBoard",{
 		lbl:DockMargin(7,7,5,8)
 		lbl:Dock(TOP)
 
-		self.pnl_players_good = pnl;
+		self.pnl_players_good = scrollBuddy;
 	end,
 	Think=function(self)
 		local worst=NULL;
@@ -357,6 +407,7 @@ function DR:ScoreboardShow()
 
 	sb = vgui.Create("DRSBoard");
 	sb:Center()
+	sb:MakePopup()
 end
 
 function DR:ScoreboardHide()
