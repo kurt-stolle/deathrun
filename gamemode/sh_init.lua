@@ -12,7 +12,7 @@ end
 config.joinTime = makeConfig("dr_config_jointime","20");
 config.roundsPerMap = makeConfig("dr_config_rounds_per_map","10");
 config.setupTime = makeConfig("jb_config_setuptime","30")
-config.baddiePercentage = makeConfig("jb_config_baddiepercentage","20")
+config.baddiePercentage = makeConfig("jb_config_baddiepercentage","5")
 
 DR={}
 DR._IndexCallback = {}
