@@ -1,2 +1,2 @@
 # deathrun
-The original DeathRun gamemode
+The original DeathRun DR
