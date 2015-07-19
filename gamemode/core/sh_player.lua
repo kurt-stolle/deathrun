@@ -1,3 +1,5 @@
+DR.ESAntiIdle=true
+
 local bit_band=bit.band
 local bit_bnot=bit.bnot
 hook.Add( "SetupMove", "DR.Cheat.AutoJump", function( ply, move )

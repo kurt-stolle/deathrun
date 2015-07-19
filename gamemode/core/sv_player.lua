@@ -122,6 +122,15 @@ end
 function DR:ShowSpare2(p)
 end
 
+
+function DR:ESPlayerIdle(p)
+	p:SetTeam(TEAM_SPECTATOR);
+	p:Spawn();
+
+
+	p:SendNotificationPopup("Notice","You have been moved to the Spectator team, because you were idle for too long.")
+end
+
 function DR:PlayerShouldTakeDamage( victim, pl )
 	if pl:IsPlayer() then -- check the attacker is player
 		if( pl:Team() == victim:Team() ) then -- check the teams are equal and that friendly fire is off.
