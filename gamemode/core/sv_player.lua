@@ -52,40 +52,22 @@ function DR:PlayerSpawn(p)
 		return DR:PlayerSpawnAsSpectator(p)
 	end
 
+	p:UnSpectate();
 	p:StripWeapons()
-
+	p:SetMoveType(MOVETYPE_WALK);
 
 	if p:Team() == TEAM_BADDIE then
-		if DR.Sidescroll then
-			DR:SidescrollSendTraps(p)
-		end
-
-		p:UnSpectate();
-		p:SetMoveType(MOVETYPE_WALK);
 		player_manager.SetPlayerClass( p, "player_baddie" )
-
-		player_manager.OnPlayerSpawn( p )
-		player_manager.RunClass( p, "Spawn" )
-
-		-- Call item loadout function
-		hook.Call( "PlayerLoadout", DR, p )
-
-		-- Set player model
-		hook.Call( "PlayerSetModel", DR, p )
 	elseif p:Team() == TEAM_GOODIE then
-		p:UnSpectate();
-		p:SetMoveType(MOVETYPE_WALK);
 		player_manager.SetPlayerClass( p, "player_goodie" )
-
-		player_manager.OnPlayerSpawn( p )
-		player_manager.RunClass( p, "Spawn" )
-
-		player_manager.RunClass( p, "Loadout" )
-
-		-- Set player model
-		hook.Call( "PlayerSetModel", DR, p )
-
 	end
+
+	player_manager.OnPlayerSpawn( p )
+	player_manager.RunClass( p, "Spawn" )
+
+	player_manager.RunClass( p, "Loadout" )
+
+	hook.Call( "PlayerSetModel", DR, p )
 	hook.Call("PlayerLoadout",DR,p);
 
 	p:SetAvoidPlayers(false);

@@ -193,6 +193,10 @@ function DR:NewRound(rounds_passed)
 end
 local _winner=0;
 function DR:EndRound(winner)
+	if not winner then
+		winner = 0
+	end
+
 	DR:DebugPrint("Rounded ended with winner "..winner)
 
 	_winner=winner

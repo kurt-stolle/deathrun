@@ -48,7 +48,7 @@ hook.Add("HUDPaint","DR.HUDPaint.TargetID",function()
 
       if not posTarget then continue end
 
-      if posTarget:Distance(posLocal) > 500 then
+      if posTarget:Distance(posLocal) > 500 and ply:Team() == TEAM_GOODIE then
         v._hud_nameFade = Lerp(FrameTime()*12,v._hud_nameFade or 0,0);
       else
         v._hud_nameFade = Lerp(FrameTime()*8,v._hud_nameFade or 0,255)

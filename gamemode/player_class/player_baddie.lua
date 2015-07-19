@@ -18,7 +18,7 @@ function PLAYER:SelectModel()
 end
 function PLAYER:Loadout()
 	self.Player:RemoveAllAmmo();
-	self.Player:Give(self.Player:ESGetMeleeWeaponClass());
+	self.Player:Give( "excl_crowbar" );
 	self.Player:Give( "weapon_nothing" );
 	self.Player:SelectWeapon("weapon_nothing");
 

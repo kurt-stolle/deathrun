@@ -16,7 +16,7 @@ size= 14,
 weight= 800
 })
 function DR:HUDShouldDraw(name)
-	return name=="CHudGMod" or name=="CHudWeaponSelection";
+	return (name=="CHudGMod" or name=="CHudWeaponSelection");
 end
 
 local function convertTime(t)
