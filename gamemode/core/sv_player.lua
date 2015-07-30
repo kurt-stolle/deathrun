@@ -77,7 +77,7 @@ end
 function DR:PlayerSpawnAsSpectator( p )
 	p:StripWeapons()
 	p:KillSilent()
-	
+
 	if ( p:Team() == TEAM_UNASSIGNED ) then
 		p:Spectate( OBS_MODE_FIXED )
 		return
@@ -128,7 +128,7 @@ function DR:ESPlayerIdle(p)
 	p:Spawn();
 
 
-	p:SendNotificationPopup("Notice","You have been moved to the Spectator team, because you were idle for too long.")
+	p:ESSendNotificationPopup("Notice","You have been moved to the Spectator team, because you were idle for too long.")
 end
 
 function DR:PlayerShouldTakeDamage( victim, pl )
@@ -166,7 +166,7 @@ hook.Add( "KeyPress", "deathrun.spectator.controls", function(p,l)
 				if v:Alive() then
 					table.insert(targets,v)
 				end
-			end 
+			end
 
 			if #targets >= 1 then
 
