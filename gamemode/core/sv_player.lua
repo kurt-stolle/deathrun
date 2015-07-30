@@ -124,6 +124,8 @@ end
 
 
 function DR:ESPlayerIdle(p)
+	if p:Team() == TEAM_SPECTATOR then return end
+	
 	p:SetTeam(TEAM_SPECTATOR);
 	p:Spawn();
 
